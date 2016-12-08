@@ -1,4 +1,5 @@
 GIT Notes:
+http://gittest.paperplane.io/todo.txt
 
 //git reset <file>                  = Unstage a particular file
 //git reset --soft HEAD^            = Undo last commit, put files back onto staging
