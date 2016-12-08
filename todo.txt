@@ -1,6 +1,29 @@
 GIT Notes:
 
+//git reset <file>                  = Unstage a particular file
 //git reset --soft HEAD^            = Undo last commit, put files back onto staging
 //git commit --amend -m "Message"   = change/add to the previous commit
 //git reset --hard HEAD^            = Undo last commit and all changes
+//git checkout -- <file>            = Discard changes
+
+DIFF:
+//git diff HEAD <file>
+
+//git remote add origin https://github.com/jgeringer/git-real.git
+//git push -u origin master         = origin: remote repository name, master: local branch to push
+
+Having Muliple Remotes:
+//github is our cannonical repo = origin
+
+To add a new remote:
+//git remote add <name> <address>
+    Try remoting to my live site
+
+To remove Remotes
+git remote rm <name>
+
+To push to Remotes:
+git push -u <name> <branch>         = -u means that it'll remember it so next time you can just do "git push", <branch> = usually is master
+
+
 
