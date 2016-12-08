@@ -1,1 +1,6 @@
-this is my test todo list file!
+GIT Notes:
+
+//git reset --soft HEAD^            = Undo last commit, put files back onto staging
+//git commit --amend -m "Message"   = change/add to the previous commit
+//git reset --hard HEAD^            = Undo last commit and all changes
+
