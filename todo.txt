@@ -64,7 +64,8 @@ git commit -a           = leave off commit message since the editor will give us
 
 Remote Branches:
 git checkout -b shopping_cart   = creates and checks out a shopping_cart branch
-git push origin shopping_cart   = pushes the shopping_cart branch to github
+git push origin shopping_cart   = pushes the shopping_cart branch to github. Links the local branch to the remote branch and starts tracking it.
 
- 
+
+
 
