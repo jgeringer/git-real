@@ -33,3 +33,5 @@ git clone https://github.com/codeschool/git-real.git git-demo       = "git-demo"
 git remote -v                                                       = lists the Remotes
 
 Branching:
+git branch cat          = creates a branch from the current master branch you are onto
+git checkout cat        = switch to the new branch
