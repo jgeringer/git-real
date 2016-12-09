@@ -44,3 +44,15 @@ git branch -d cat
 
 Non-Fast-Forward"
 git checkout -b admin   = makes a new branch and checks it out
+
+Fix Merge Errors:
+Inside Vi...
+Vi Commands:
+    :wq = save and quit
+    :q! = cancel and quit
+    k   = up
+    j   = down    
+    h   = left
+    l   = right
+    i   = insert mode
+    ESC = leave mode  
