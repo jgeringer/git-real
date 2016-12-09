@@ -56,3 +56,7 @@ Vi Commands:
     l   = right
     i   = insert mode
     ESC = leave mode  
+
+Merge Conflict:
+Edit the file first then...
+git commit -a           = leave off commit message since the editor will give us a good one. 
