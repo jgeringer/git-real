@@ -27,4 +27,9 @@ To push to Remotes:
 git push -u <name> <branch>         = -u means that it'll remember it so next time you can just do "git push", <branch> = usually is master
 
 
+Cloning:
+git clone https://github.com/codeschool/git-real.git
+git clone https://github.com/codeschool/git-real.git git-demo       = "git-demo" is using a different local folder name, instead of the repo name that is getting pulled down.
+git remote -v                                                       = lists the Remotes
 
+Branching:
