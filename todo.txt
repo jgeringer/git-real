@@ -35,12 +35,16 @@ git remote -v                                                       = lists the 
 Branching:
 git branch cat          = creates a branch from the current master branch you are onto
 git checkout cat        = switch to the new branch
+git branch              = list all local branches
+git branch -r           = list all remote branches
 
 Merge:
 git merge cat           = do this from the master branch
 
 Delete Branch:
-git branch -d cat
+git branch -d cat       = deletes the local branch
+git branch -D cat       = forces a delete on it, even though there may be changes on it that have not been checked in yet
+
 
 Non-Fast-Forward"
 git checkout -b admin   = makes a new branch and checks it out
@@ -61,11 +65,22 @@ Merge Conflict:
 Edit the file first then...
 git commit -a           = leave off commit message since the editor will give us a good one.
 
-
 Remote Branches:
 git checkout -b shopping_cart   = creates and checks out a shopping_cart branch
 git push origin shopping_cart   = pushes the shopping_cart branch to github. Links the local branch to the remote branch and starts tracking it.
+git remote show origin          = gives you the status of all of the branches
+git push origin :shopping_cart  = delete a remote branch
+git remote prune origin         = To cleanup deleted remote branches
+git push heroku-staging staging:master      = Deploys to heroku since it needs a master branch
 
+Tagging: A reference to a commit (used mostly for release versioning)
+git tag                                 = lists all tags
+git checkout v0.0.2                     = checks out code at commit that has this tag
+git tag -a v0.0.3 -m "version 0.0.3"    = tags
+git push --tags                         = to push new tags
 
+Misc Notes:
+To write a file...
+echo "text that shows inside of the file goes here" > filename.txt
 
 
