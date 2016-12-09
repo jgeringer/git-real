@@ -41,3 +41,6 @@ git merge cat           = do this from the master branch
 
 Delete Branch:
 git branch -d cat
+
+Non-Fast-Forward"
+git checkout -b admin   = makes a new branch and checks it out
