@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <title>Javascript: Prototypes</title>
+    </head>
+    <body>
+
+    <script>
+
+        //objects parent is called Prototype
+        //secret methods of objects: constructor, valueOf, toLocaleString, toString, isPrototypeOf, propertyIsEnumerable, hasOwnProperty
+        //a Prototype is like a blueprint Object for the Object we are trying to create.
+        //some other prototypes: array (method example: .pop()), string, number, function
+        //all of these other prototypes inherhit from the Object Prototype.
+
+        var witch = "I'll get you, my pretty... and your little dog, too!";
+
+        String.prototype.countAll = function(letter){
+            var letterCount = 0;
+            for(var i = 0; i<this.length; i++){ //witch is this!
+                if(this.charAt(i).toUpperCase() == letter.toUpperCase()){
+                    letterCount++;
+                };
+            };
+            return letterCount;
+        };
+
+        witch.countAll("I");
+
+
+
+
+var forestCows = [
+  {name: "Legolas", type: "calf", hadCalf: null},
+  {name: "Gimli", type: "bull", hadCalf: null},
+  {name: "Arwen", type: "cow", hadCalf: null},
+  {name: "Galadriel", type: "cow", hadCalf: null},
+  {name: "Eowyn", type: "cow", hadCalf: "Legolas"}
+];
+
+Object.prototype.noCalvesYet = function(){
+  if((this.type == "cow") && (this.hadCalf == null)){
+    return true;
+  } else {
+    return false;
+  }  
+};
+
+Array.prototype.countForBreeding = function(){
+  var numToBreed = 0;
+  for(var i=0; i<this.length; i++){
+    if(forestCows[i].noCalvesYet()){
+      numToBreed++;
+    }
+  }
+  return numToBreed;
+};
+
+
+    </script>
+
+    </body>
+</html>

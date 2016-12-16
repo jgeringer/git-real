@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <title>Javascript Test</title>
+    </head>
+    <body>
+
+    <script>
+
+        //adding to an existing object: function properties
+
+        var aquarium = {
+            Nemo:   { type: "fish", species: "clownfish", length: 3.7 },
+            Malin:  { type: "fish", species: "clownfish", length: 4.1 },
+            Dory:   { type: "fish", species: "blue tang", length: 6.2 },
+            Peach:   { type: "echinoderm", species: "starfish", length: 5.3 },
+            "Coral Castle": { type:"environment", material: "coquina", moves: false },
+            "Dragon Statue": { type:"environment", material: "plastic", moves: false },
+            addCritter: function(name, type, species, length){
+                this[name] = { type: type, species: species, length: length };
+            }
+        };
+
+        //add a critter through the object...
+        aquarium.addCritter("Bubbles", "fish", "yellow tang", 5.6);
+
+        //delete a critter function...
+        aquarium.takeOut = function(name){
+            this[name].name = name; //creates a new property inside the object so we dont loose the name;
+            var temp = this[name]; //making a temp object of it allows us to still reference it, in case we want to put it somewhere else.
+            delete this[name];
+            return temp;
+        };
+
+        //delete a critter
+        var fishOutOfWater = aquarium.takeOut("Malin");
+        console.log(fishOutOfWater); //returns Malin's object
+
+
+        // function addCritter(name, type, species, length){
+        //     container[name] = { type: type, species: species, length: length};
+        // }
+
+    </script>
+
+    </body>
+</html>

@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <title>Javascript: Prototypes - Created</title>
+    </head>
+    <body>
+
+    <script>
+      //A second way to build objects using object.created
+
+      var shoe = {
+        size: 6,
+        gender: "women",
+        construction: "slipper"
+      };
+
+      var magicShoe = Object.create(shoe); //first arg of the Object.create() method will be use as the prototype of the newly created object.
+
+      shoe.isPrototypeOf(magicShoe); //returns true since shoe is a prototype of magicShoe
+
+      //To make an empty object prototype
+      var shoe = { size: undefined, gender: undefined, construction: undefined };
+
+      var mensBoot = Object.create(shoe);
+      mensBoot.size = 12;
+      mensBoot.gender = "men";
+
+      var flipFlop = Object.create(shoe);
+      flipFlop.size = 9;
+      flipFlop.gender = "men";
+
+      
+      //Constructor Functions: Setup inheritance while also assigning specific property values.
+      //Basically, instead of doing the above where we have to assign values individually, we can make a class.
+      function Shoe(shoeSize, shoeColor, forGender, constructStyle){ //Uppercased! This distinguishes it as a maker of an entire Class of objects... a constructor.
+        this.size = shoeSize; //this keyword refers to the new instance of the class.
+        this.color = shoeColor;
+        this.gender = forGender;
+        this.construction = constructStyle;
+      }
+
+      //Create a new instance of it...
+      var beachShoe = new Shoe(10, "blue", "women", "flipflop");
+
+      //add to it...
+      beachShoe.straps = 2;
+
+
+      //By setting a constructors prototype property, every new instance will refer to it for extra properties!
+      //These (putOn and takeOff) are the same for all Shoe's, so we are adding to the prototype of Shoe.
+      Shoe.prototype = {
+        putOn: function(){ 
+            alert("Your "+ this.construction + "'s on!"); //this keyword will look down to the particular Shoe that called the inherited function and pulls it's data from it.
+          },
+        takeOff: function(){ 
+          alert("Phew! Somebody's size "+ this.size +"'s are fragrant!");
+          }
+      };
+
+      beachShoe.takeOff();
+
+
+    </script>
+
+    </body>
+</html>

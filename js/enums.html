@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <title>Javascript Test</title>
+    </head>
+    <body>
+
+    <script>
+
+        //adding to an existing object: function properties
+
+        var aquarium = {
+            Nemo:   { type: "fish", species: "clownfish", length: 3.7 },
+            Malin:  { type: "fish", species: "clownfish", length: 4.1 },
+            Dory:   { type: "fish", species: "blue tang", length: 6.2 },
+            Peach:   { type: "echinoderm", species: "starfish", length: 5.3 },
+            "Coral Castle": { type:"environment", material: "coquina", moves: false },
+            "Dragon Statue": { type:"environment", material: "plastic", moves: false },
+            addCritter: function(name, type, species, length){
+                this[name] = { type: type, species: species, length: length };
+            }
+        };
+
+        aquarium.countFish = function(){        
+            var numFish = 0;
+
+            //for-in loop: used to look into every key in an object! since we cant use .length on objects...
+            for(key in this){ //replaced "aquarium" with this, since 'this' is the owner.
+                if(this[key].type == "fish"){
+                    numFish++;
+                };
+            };
+
+            return numFish;
+        };
+
+
+
+var rockSpearguns = {
+  Sharpshooter: {barbs: 2, weight: 10, heft: "overhand"},
+  Pokepistol: {barbs: 4, weight: 8, heft: "shoulder"},
+  Javelinjet: {barbs: 4, weight: 12, heft: "waist"},
+  Firefork: {barbs: 6, weight: 8, heft: "overhand"},
+  "The Impaler": {barbs: 1, weight: 30, heft: "chest"}
+};
+
+// convert listGuns function
+rockSpearguns[listGuns] = function(guns) {
+  for (var property in this) {
+    if(this[property]["heft"] != undefined) {
+    	console.log("Behold! " + property + ", with " +
+                this[property]["heft"] + " heft!");
+    }
+  }
+};
+
+// call listGuns using bracket notation on rockSpearguns
+rockSpearguns[listGuns]();
+//listGuns(rockSpearguns);
+
+
+
+    </script>
+
+    </body>
+</html>

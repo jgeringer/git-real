@@ -1,0 +1,85 @@
+<html>
+    <head>
+        <title>Javascript: Prototypes - Useful Properties</title>
+    </head>
+    <body>
+
+    <script>
+
+      var x = 4;
+      var y = "4";
+
+      x.valueOf(); //returns 4
+      y.valueOf(); //returns "4"
+      x.toString(); //returns "4"
+
+      x.valueOf() == y.valueOf(); //true
+      x.valueOf() === y.valueOf(); //false
+
+
+      
+      var cities = [
+        ["Kansas City", 48056],
+        ["Chicago", 59880041],
+        ["Lenexa", 127939]
+      ];
+      
+      var Tornato = function(category, affectedAreas, windGust){ //constructors can be function expressions, too!
+        this.category = category;
+        this.affectedAreas = affectedAreas;
+        this.windGust = windGust;
+      };
+
+      Tornato.prototype.valueOf = function(){
+        var sum = 0;
+        for(var i=0; i < this.affectedAreas.length; i++){
+          sum += this.affectedAreas[i][1];
+        }
+        return sum;
+      };
+
+      var twister = new Tornato("F5", cities, 220);
+
+      
+      //pushing to the array gives us a new value
+      cities.push(["Albequrquie", 37857]); //since the cities array was passed in by reference, we'll always get an updated value.
+
+
+      Tornato.prototype.toString = function(){
+        var list = "";
+        for(var i = 0; i < this.affectedAreas.length; i++){
+          if(i < this.affectedAreas.length - 1){
+            list = list + this.affectedAreas[i][0] + ", ";
+          } else {
+            list = list + "and " + this.affectedAreas[i][0];
+          }
+        }
+        return "This Tornato has been classified as an "+ this.category + ", with wind gusts up to " + this.windGust + "mph. Affected areas are: " + list + ", potentially affecting population of " + this.valueOf() + ".";
+      }
+
+
+      twister.constructor; //returns the entire constructor function: Twister
+      twister.constructor.prototype; //returns the prototype object: { valueOf, toString };
+
+
+
+      //HasOwnProperty: Helps identify property location
+      
+      Object.prototype.findOwnerOfProperty = function(propName){ //takes in property name we are looking for
+        var currentObject = this;
+        while(currentObject !== null){ //object prototype is as far as it goes. it's null there
+          if(currentObject.hasOwnProperty(propName)){
+            return currentObject;
+          } else {
+            currentObject = currentObject.__proto__;
+          }
+        }
+        return "No property found";
+      }
+
+      twister.findOwnerOfProperty("valueOf");
+
+    </script>
+
+    </body>
+</html>
