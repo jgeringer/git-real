@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <title>Javascript Best Practices: Loop Optimization</title>
+    </head>
+    <body>
+
+    <script>
+
+        var treasureChest = {
+            goldCoins: 10000,
+            magicalItem: "Crown of Speed",
+            necklaces: ["ruby", "pearl", "sapphire", "diamond"],
+            openLind: function(){
+                alert("Creeeeek!");
+            }
+        };
+
+        console.log("Youve found the following necklaces:");
+        for(var i = 0; i < treasureChest.necklaces.length; i++){
+            console.log(treasureChest.necklaces[i]);
+        };
+        //logs: ruby, pearl, sapphire, diamond
+
+        //instead cache...
+        var x = treasureChest.necklaces.length;
+        for(var i = 0; i < x; i++){
+            console.log(treasureChest.necklaces[i]);
+        };
+
+        //even more optimization...
+        var list = treasureChest.necklaces;
+        for(var i = 0, x = treasureChest.necklaces.length; i < x; i++){ //by putting the var inside the loop params, we signal that they are only intended inside this loop.
+            console.log(list[i]);
+        };
+
+
+        //example using for-in loop. will pull in other methods added to that prototype...
+        var list = treasureChest.necklaces;
+        for(p in list){
+            console.log(list[p]);
+        }
+        //logs: ruby, pearl, sapphire, diamond, countType, removeAll (see below - ones added to prototype will show)
+
+        //array methods that we've added to the array prototype, so it can be used with arrays! not the point of this lesson, but still neat.
+        Array.prototype.countType = function (type){
+            var count = 0;
+            for(var i=0, x = this.length; i < x; i++){
+                if(this[i] === type){
+                    count++;
+                }
+            }
+            return count;
+        };
+
+        Array.prototype.removeAll = function (item){
+            var removed = [];
+            for(var i=0, x = this.length; i < x; i++){
+                if(this[i] === item){
+                    removed.push(item);
+                    this.splice(i, 1);
+                }
+            }
+            return removed;
+        };
+        
+        
+    </script>
+
+    </body>
+</html>

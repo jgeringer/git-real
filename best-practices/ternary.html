@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>Javascript Best Practices: Ternary</title>
+    </head>
+    <body>
+
+    <script>
+
+        var isArthur = true;
+        var isKing = false;
+        var weapon = (isArthur ? "Excalibur" : "Longsword"); //ternary
+        var helmet;
+        var isArcher = true;
+
+        console.log((isArthur && isKing ? "Excalibur" : "Longsword"));
+
+        //iife
+        isArthur && isKing ? 
+            function(){
+                alert("Hail Arthur, King of the Britons!");
+            }()
+            :
+            function(){
+                alert("Charge on!");
+            }();
+
+
+        //multiple actions in ternaries...
+        isArthur && isKing ? 
+            (weapon = "Excalibur", helmet = "Goosewhite")
+            :
+            (weapon = "Longsword", helmet = "Iron Helm");
+
+
+        //nested ternaries...
+        isArthur && isKing ? 
+            (weapon = "Excalibur", helmet = "Goosewhite")
+            :
+            isArcher ?
+                (weapon = "Longbow", helmet = "Mail Helm")
+                :
+                (weapon = "Longsword", helmet = "Iron Helm");
+
+    </script>
+
+    </body>
+</html>

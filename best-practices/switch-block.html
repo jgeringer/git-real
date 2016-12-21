@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <title>Javascript Best Practices: Switch Block</title>
+    </head>
+    <body>
+
+    <script>
+
+        //Knight constructor
+        function Knight(name, regiment){
+            this.name = name;
+            this.regiment = regiment;
+
+            switch(regiment){
+                case 1:
+                    this.weapon = "Broadsword";
+                    break; //needed to prevent fall-through
+                case 2:
+                    this.weapon = "Claymore";
+                    break;
+                //example of having regiments 4 and 5 use the Morning Star...
+                case 4:
+                case 5:
+                    this.weapon = "Morning Star"
+                    break;
+                case 3: 
+                    this.weapon = "Longsword";
+                    break;
+                case "King":
+                    this.weapon = "Excalibur";
+                    break;
+                default:
+                    alert(`${name} has an incorrect regiment number`);
+            }
+
+        };
+
+        var soldier = new Knight("Tim", 2);
+        console.log(soldier.weapon); //logs: "Claymore"
+
+
+        //Fall-through allows hierarchical code execution...
+        function CerimonialDagger(knight, rank){
+            this.length = 8;
+            this.owner = knight;
+
+            switch(rank){
+                case "King":
+                    this.diamonds = 1;
+                case "High Constable":
+                    this.amethyst = 2;
+                case "Field Marshal":
+                    this.sapphires = 4;
+                case "Captain":
+                    this.emeralds = 1;
+                case "Knight":
+                    this.rubies = 6;
+            }
+        }
+
+        var knightsDagger = new CerimonialDagger("Jerome", "Knight");
+        var kingsDagger = new CerimonialDagger("Arthur", "King");
+
+
+    </script>
+
+    </body>
+</html>

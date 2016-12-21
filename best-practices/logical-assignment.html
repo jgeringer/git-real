@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <title>Javascript Best Practices: Logical Assignment</title>
+    </head>
+    <body>
+
+    <script>
+
+        var armory = {
+            addSword: function(sword){
+                this.swords = this.swords ? this.swords : [];
+
+                //or can be written logically like this...
+                this.swords = this.swords || [];
+                
+                this.swords.push(sword);
+            },
+            retrieveSword: function(request){
+                return (this.swords.indexOf(request) >0) ? 
+                    this.swords.splice(this.swords.indexOf(request), 1)[0] //remove it from the swords array. 
+                        //indexOf(index, amount of items to take out after this index). in this case: just one.
+                        //[0] = return the zeroth array element with the swords string in it.
+                    :
+                    alert(`No, ${request}, baby!`);
+            }
+        };
+
+        armory.addSword("Broadsword");
+        armory.addSword("Katana");
+
+        //if both are falsy, then it takes the last one
+        var result1 = undefined || "";
+        console.log(result1); //logs: ""
+
+        var result2 = "" || undefined;
+        console.log(result2); //logs: undefined
+
+
+        //logical and...
+        var result1 = undefined && 42;
+        console.log(result1); //logs: undefined. since it short circuits at undefined
+
+        //when all are truthy, it returns the last truthy one found...
+        var result1 = "King" && "Arthur";
+        console.log(result1); //logs: "Arthur"
+
+
+        //contingent assignments...
+        //var swords = ["broadsword", "katana", "claymore"];
+        var isKnight = true;
+        var armoryIsOpen = true;
+        var weapon = armoryIsOpen && isKnight && armory.retrieveSword("Katana"); //weapon = "Katana"         
+
+
+    </script>
+
+    </body>
+</html>

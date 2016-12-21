@@ -1,0 +1,120 @@
+<html>
+    <head>
+        <title>Javascript Best Practices: Short Performance Tips</title>
+    </head>
+    <body>
+
+        <script>
+            //let inheritance help with memory efficiency...
+            //prototype is great for sharing resources.
+
+            function SignalFire(ID, startingLogs){
+                this.fireID = ID;
+                this.logsLeft = startingLogs;
+
+                this.addLogs = function(numLogs){
+                    this.logsLeft += numLogs;
+                }
+
+                this.lightFire = function(){
+                    alert("Whooooosh!");
+                }
+
+                this.smokeSignal = function(message){
+                    if(this.logsLeft < this.message.length / 10){
+                        alert("Not enough fuel to send the current message");
+                    } else { 
+                        this.lightFire();
+                        var x = this.message.length;
+                        for(var i = 0; i<x; i++){
+                            alert(this.message[i]);
+                            if(i % 10 == 0 && i != 0){
+                                this.logsLeft--;
+                            }
+                        }
+                    }
+
+                }
+            };
+
+            //instead use prototype for shared stuff...
+            function SignalFire(ID, startingLogs){
+                this.fireID = ID;
+                this.logsLeft = startingLogs;
+            };
+
+            SignalFire.prototype = {
+                addLogs: function(numLogs){
+                    this.logsLeft += numLogs;
+                },
+
+                lightFire: function(){
+                    alert("Whooooosh!");
+                },
+
+                smokeSignal: function(message){
+                    if(this.logsLeft < this.message.length / 10){
+                        alert("Not enough fuel to send the current message");
+                    } else { 
+                        this.lightFire();
+                        var x = this.message.length;
+                        for(var i = 0; i<x; i++){
+                            alert(this.message[i]);
+                            if(i % 10 == 0 && i != 0){
+                                this.logsLeft--;
+                            }
+                        }
+                    }
+                }
+            };
+
+            var fireOne = new SignalFire(1, 20);
+            var fireTwo = new SignalFire(2, 18);
+            var fireThree = new SignalFire(3, 24);
+
+            //now, the addLogs method is found in one place, instead of being replicated across all signalFires.
+            fireOne.addLogs(8);
+            fireTwo.addLogs(10);
+            fireThree.addLogs(4);
+
+            //this shows that we only add the smokeSignal to one instance, the one that needs it, not every one.
+            fireThree.smokeSignal("Goblins!");
+
+
+
+            //Adding DOM elements...
+            //creates a document reflow every time an element is added to the DOM
+            //Document Fragments:
+            
+            var list = document.getElementById("kotwList"),
+                kotw = ["Joe", "Haily", "Theresa", "Hardy"],
+                fragment = document.createDocumentFragment(), //fragment - its like a staging area that is going to hold all of the li elements.
+                element;
+
+            for (var i=0, x = kotw.length; i<x; i++){
+                element = document.createElement("li");
+                element.appendChild(document.createTextNode(kotw[i]));
+                //list.appendChild(element);
+                fragment.appendChild(element);
+            }
+            list.appendChild(fragment); //adding all items at once to the DOM.
+
+
+            //concatination...
+            //instead of looping through all index's of the array, you can join them and put in a separator between them...
+            var newPageBuild = ["<html>", "<body>", "</body>", "</html>"];
+            page = newPageBuild.join('\n');
+            console.log(page); 
+            //logs: 
+            // <html>
+            // <body>
+            // </body>
+            // </html>
+
+
+        </script>
+
+        <ul id="kotwList"></ul>
+
+    </body>
+</html>
