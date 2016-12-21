@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <title>Javascript ES6: sets</title>
+    </head>
+    <body>
+
+    <script>
+
+    let tags = [];
+    tags.push("test1");
+    tags.push("web");
+    tags.push("web"); //creates dup entry
+
+    let tags = new Set();
+    tags.add("Javascript");
+    tags.add("web");
+    tags.add("web"); //dups are ignored with Sets
+
+    //sets are iterative...
+    for(let tag of tags){
+        console.log(tag);
+    }
+
+    let [a, b] = tags;
+    console.log(a, b); //Javascript, web
+
+    //weakset...
+    let weakTags = new WeakSet();
+    weakTags.add("Javascript"); //type error: only objects can be added as weaksets...
+    weakTags.add({ name: "javascript" });
+    //has or delete are some methods.
+
+    </script>
+
+    </body>
+</html>

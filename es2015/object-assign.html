@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <title>Javascript ES6: object.assign</title>
+    </head>
+    <body>
+
+    <script>
+
+        function countdownTimer(target, timeLeft, options = {}){
+
+            //grouping defaults
+            let defaults = {
+                container:              ".timer-display",
+                timeUnit:               "seconds",
+                clonedDataAttribute:    "cloned",
+                timeoutClass:           ".is-timeout",
+                timeoutSeenClass:       ".is-timeout-soon",
+                timeoutSoonTime:        10
+            };
+
+            //object.assign takes care of the merge process for the options. copies properties from source obj to target obj
+            //first parameter is the target object. then params after that are the source object
+            let settings = Object.assign({}, defaults, options);
+
+            //runs when value passed as an arg for timeUnit is different than the original value
+            if(settings.timeUnit !== defaults.timeUnit){
+                _conversionFunction(timeLeft, settings.timeUnit);
+            }
+        }
+
+        countdownTimer($('.btn-undo'), 60, { container: '.new-post-options' });
+        
+    </script>
+
+    </body>
+</html>

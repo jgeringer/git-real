@@ -1,13 +1,75 @@
 <html>
     <head>
-        <title>Javascript ES6</title>
+        <title>Javascript ES6: let and const</title>
     </head>
     <body>
 
     <script>
+        function loadProfiles(userNames = []){ //we give userNames a default value of empty array. This way we do not have to do an undefined check within the function.
+            if(userNames.length > 3){
+                let loadingMessage = "This might take a while...";
+                _displaySpinner(loadingMessage);
+            } else {
+                let flashMessage = "Loading Profiles";
+                _displayFlash(flashMessage);
+            }
+            //... fetch names and build sidebar.
+        };
 
-        
+         
+        //function defaults:
+        function setPageThread(name, options = {}){ //setting the default value of options to an empty options object
+            //it's a good idea to assign the properties of the object to local variables.
+            let popular = options.popular; 
+            let expires = options.expires;
+            let activeClass = options.activeClass;
+        };
 
+        //using Named Parmeters instead
+        function setPageThread(name, {popular, expires, activeClass} = {}){ //we now know which arguments are available.
+            console.log("Name:", name);
+            console.log("Popular:", popular);
+            console.log("Expires:", expires);
+            console.log("Active:", activeClass);
+        };
+
+        setPageThread("New version out soon!", { popular: true });
+        //prints out, but with no error...
+        // Name: New Version out Soon!
+        // Popular: true
+        // Expires: undefined
+        // Active: undefined
+
+
+        //variatic function: can take any number of arguments
+        displayTags("songs");
+        displayTags("songs", "lyrics");
+        displayTags("songs", "lyrics", "bands");
+
+        function displayTags(...tags){ //rest parameter: dots tell it to group all arguments into an array. used in function declaration
+            for(let i in tags){ //so now tags is just an array
+                let tag = [i];
+                _addToTopic(tag);
+            }
+        }
+
+        getRequest("/topics/17/tags", function(data){
+            let tags  = data.tags;
+            displayTags(...tags); //spread operator: used in function invocation. same as passing this array as individual arguments.
+        })
+
+        //arrow functions: bind to the scope, not where they run. =>
+
+    </script>
+
+    <script>
+        loadProfiles(['Sam', 'Tyler', 'Brook']);
+
+        setPageThread("New version out soon!", {
+            popular: true,
+            expires: 10000,
+            activeClass: "is-page-thread"
+        });
     </script>
 
     </body>

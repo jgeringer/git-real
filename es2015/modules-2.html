@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <title>Javascript ES6: modules-2</title>
+    </head>
+    <body>
+
+    <script>
+
+        //constants:
+        //good idea to create a constance file
+        
+        //**** contstants.js begin ****/
+        export const MAX_USERS = 3;
+        export const MAX_REPLIES = 3;
+        //**** contstants.js end ****/
+
+        //**** load-profiles.js begin ****/
+        import { MAX_USERS, MAX_REPLIES } from './constants';
+
+        function loadProfiles(userNames){
+            if(userNames.length > MAX_USERS){
+                //...
+            }
+        }
+        //**** load-profiles.js end ****/
+
+        //exporting class modules with default export...
+        //**** flash-message.js begin ****/
+        export default class FlashMessage {
+            constructor(message){
+                this.message = message;
+            }
+            renderAlert(){
+                alert(`${this.message} from alert`);
+            }
+            renderLog(){
+                console.log(`${this.message} from log`);
+            }
+        }
+        // or you can export it this way too...
+        export { FlashMessage };
+        //**** flash-message.js end ****/
+
+        //importing a class
+        //**** app.js begin ****/
+        import FlashMessage from './flash-message';
+        
+        //or it can be imported this way too...
+        import { FlashMessage } from './flash-message';
+
+        //must create an instance of the class too;
+        let flash = new FlashMessage("Hello");  
+
+        flash.renderAlert();
+        //**** flash-message.js end ****/
+
+
+
+
+
+    </script>
+
+    </body>
+</html>

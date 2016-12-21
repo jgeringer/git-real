@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <title>Javascript ES6: generators</title>
+    </head>
+    <body>
+
+    <script>
+
+        //Generators:
+        //begin with "function *functionName()"
+        //you can then use the "yeild" keyword to return interator objects.
+        function *nameList(){
+            yeild "Sam";    // {done: false, value: Sam }
+            yeild "Tyler";  // {done: false, value: Tyler }
+        };
+
+        for(let name of namesList()){
+            console.log(name);
+            //logs...
+            // "Sam"
+            // "Tyler"
+        }
+        
+        //or you can use the spread operator...
+        let names = [...namesList()];
+        console.log(names); 
+        //logs...
+        //["Sam", "Tyler"]
+
+        //can even use destructuring...
+        let [first, second] = namesList();
+        console.log(first); //"Sam"
+        console.log(second); //"Tyler"
+        
+
+        //replacing manual iterator objects...
+        let post = {
+            title: "New Features in JS",
+            replies: 19
+        };
+
+        //replace this...
+        post[Symbol.iterator] = function(){
+            let properties = Object.keys(this);
+            let count = 0;
+            let isDone = false;
+
+            let next = () => {
+                if(count >= properties.length){
+                    isDone = true;
+                }
+                return {
+                    done: isDone,
+                    value: this[properties[count++]]
+                }
+            }
+            return { next };
+        };
+
+        //with this...
+        post[Symbol.iterator] = function *(){ //generator function signature
+            let properties = Object.keys(this);
+            for(let p of properties){
+                yeild this[p]; //first 'title', then 'replies'
+            }
+        };
+
+        //this is a shorter way to loop through objects
+
+
+        //wrapup...
+        nczonline.net
+        fivejs.com
+        babel
+
+    </script>
+
+    </body>
+</html>

@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <title>Javascript ES6: iterators</title>
+    </head>
+    <body>
+
+    <script>
+
+        //iterators:
+        //iterables return an iterator object. this object knows how to access items from a colletion 1 at a time, while keeping track of it's current position in the sequence.
+        let names = ["joe", "theresa", "hailey"];
+
+        for(let name of names){
+            console.log(name);
+            //this happens for each iteration inside of a "for of" loop. each iteration it calls .next(), it sends an object with two properties: {done: false, value: name};
+            //in this case, on the 4th time, it returns { done: true; value: undefined; }
+        }
+        
+        //iterator object...
+        //an iterator is an object with a "next"" property, returned by the result of calling the Symbol.iterator method.
+        let post = {
+            title: "New Features in JS",
+            replies: 19
+        };
+
+        post[Symbol.iterator] = function(){
+            let properties = Object.keys(this);
+            let count = 0;
+            let isDone = false;
+
+            let next = () => {
+                if(count >= properties.length){
+                    isDone = true;
+                }
+                return {
+                    done: isDone,
+                    value: this[properties[count++]]
+                }
+            }
+            return { next };
+        };
+
+        //now we can loop through an object!
+        for(let p of post){
+            console.log(p);
+        }
+        //logs...
+        //New Features in JS
+        //19
+
+    </script>
+
+    </body>
+</html>

@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <title>Javascript ES6: modules-1</title>
+    </head>
+    <body>
+
+    <script>
+
+        //making code modular...
+        //not adding to the global namespace, which encapsalates the code.
+        
+        //flash-message.js
+        //*******begin file
+        export default function(message){ //exposes this function to the module system.
+            alert(message);
+        }
+
+        //not available outside this module
+        function logMessage(message){
+            console.log(message);
+        }
+        //*******end file
+
+        //app.js...
+        import flashMessage from './flash-message';
+        flashMessage("Hello");
+
+
+
+        //exporting multiple functions from a module...
+        //flash-message.js
+        //*******begin file
+        export function alertMessage(message){ //no longer using default type export.
+            alert(message);
+        }
+
+        //not available outside this module
+        export function logMessage(message){
+            console.log(message);
+        }
+        //*******end file
+
+        //app.js...
+        //*******begin file
+        import { alertMessage, logMessage } from './flash-message';
+        alertMessage("Hello");
+        logMessage("Hello from log");
+        //*******end file
+
+
+
+
+        //to import an entire module as an object and call each function as a property from this object...
+        import * as flash from '/flash-message';
+        flash.alertMessage("hello from alert");
+        flash.logMessage("hello from log");
+
+
+        //another way to export...
+        function alertMessage(message){ //exposes this function to the module system.
+            alert(message);
+        }
+
+        //not available outside this module
+        function logMessage(message){
+            console.log(message);
+        }
+
+        export {alertMessage, logMessage};
+
+    </script>
+
+    </body>
+</html>

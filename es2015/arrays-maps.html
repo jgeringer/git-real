@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>Javascript ES6: maps</title>
+    </head>
+    <body>
+
+    <script>
+
+        //maps are a data structure
+        //bad part of objects is that it's keys are always converted to strings
+
+        let user1 = {name: "sam"};
+        let user2 = {name: "tyler"};
+
+        let totalReplies = new Map();
+        totalReplies.set(user1, 5);
+        totalReplies.set(user2, 42);
+
+        console.log(totalReplies.get(user1));
+        console.log(totalReplies.get(user2));
+
+        //maps keys and values have to be the same type
+
+        //weak maps
+        let user = {};
+        let mapSettings = new WeakMap();
+        mapSettings.set(user, "ES2015");
+        console.log(mapSettings.get(user)); //ES2015
+        console.log(mapSettings.has(user)); //true
+        console.log(mapSettings.delete(user)); //true
+
+        //weak maps are not iterable, can only have objects passed as keys
+        //weakmaps are better with memory
+
+
+
+    </script>
+
+    </body>
+</html>

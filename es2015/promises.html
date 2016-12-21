@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <title>Javascript ES6: promises</title>
+    </head>
+    <body>
+
+    <script>
+
+        //promises:
+        //a constructor function that takes an anonymous function with 2 callback arguments, known as handlers
+        //handlers are responsible for either resolving or rejecting the Promise.
+
+        //Promise lifecycle: 
+        //new Promise();    //when creating a new Promise, it's set to the pending state.
+        //then it can either be resolved or rejected...
+        //resolve(value);   //fullfilled
+        //reject(value);    //rejected
+
+        let fetchPollResults = getPollResultsFromServer("Sass vs. Less"); //can also be written without the "let fetchPollResults" part too.
+        fetchPollResults.then(function(results){ //results is what was passed in the resolve
+            ui.renderSidebar(results);
+        });
+
+        //can also be written without the "let fetchPollResults" part too.
+        getPollResultsFromServer("Sass vs. Less")
+        //chaining...
+        .then(function(results){
+            return results.filter((result) => result.city === "Orlando"); //only returns poll results from Orlando
+        })
+        .then(function(resultsFromOrlando){ //results is what was passed in the resolve
+            ui.renderSidebar(resultsFromOrlando);
+        })
+        .catch(function(error){ //when rejected, do this...
+            console.log("Error: ", error);
+        });
+
+
+        //or even be written this way... to extract the functions into their own
+        function filterResults(results){
+            return results.filter((result) => result.city === "Orlando"); //only returns poll results from Orlando
+        };
+
+        let ui = {
+            renderSidebar(filteredResults){
+                ui.renderSidebar(resultsFromOrlando);
+            }
+        }
+
+        getPollResultsFromServer("Sass vs. Less")
+        //chaining...
+        .then(filterResults)
+        .then(ui.renderSidebar)
+        .catch(function(error){
+            console.log("Error: ", error);
+        });
+
+
+        function getPollResultsFromServer(pollName){
+            return new Promise(function(resolve, reject){
+                let url = `/results/${pollName}`;
+                let request = new XMLHttpRequest();
+                request.open('GET', url, true);
+                request.onload = function(){
+                    if(request.status >= 200 && request.status < 400){
+                        resolve(JSON.parse(request.response)); //called when the non-blocking code is done executing
+                    } else {
+                        reject(new Error(request.status));  //called when an error occurs
+                    }
+                };
+                request.onerror = function(){
+                    reject(new Error("Error Fetching Results"));
+                };
+                request.send();
+            });
+        }
+
+    </script>
+
+    </body>
+</html>

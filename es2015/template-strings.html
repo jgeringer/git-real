@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <title>Javascript ES6: let and const</title>
+    </head>
+    <body>
+
+    <script>
+        
+        function buildUser(first, last, postCount){
+            let fullName = '${first} + ${last}';
+            const ACTIVE_POST_COUNT = 10;
+            return{ 
+                first, 
+                last, 
+                fullName,
+                isActive(){   //same as this old way... isActive: function(){
+                    return postCount >= ACTIVE_POST_COUNT;
+                }
+            }
+        }
+        
+        let user = buildUser("Sam", "Williams");
+
+        console.log(user.first);
+        console.log(user.last);
+        console.log(user.fullName);
+
+        let user = buildUser("Sam", "Williams");
+        let first = user.first;
+        let last = user.last;
+        let fullName = user.fullName;
+
+
+        //cleaner 'object destructured' version of the above...
+        let {first, last, fullName} = buildUser("Sam", "Williams"); //same names as the properties from it's return object.
+        //since buildUser returns {first, last, fullName}
+        console.log(first);
+        console.log(last);
+        console.log(fullName);
+
+
+
+
+
+// Snippet #1: object destructuring
+let { tags, isLocked } = topicInfo(17);
+
+// Snippet #2: object initializer
+let reply = { author, body, repliedAt };
+
+// Snippet #3: object initializer
+function buildMetadata(object){
+  let id = parseInt(object.id);
+  let lastUpdatedAt = object.updatedAt || object.createdAt;
+  let hashCode = _buildHashCode(object);
+
+  return { id, lastUpdateAt, hashCode };
+}
+
+    </script>
+
+    </body>
+</html>

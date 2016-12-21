@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <title>Javascript ES6: arrays</title>
+    </head>
+    <body>
+
+    <script>
+
+        let users = ["sam", "tyler", "brook"];
+
+        let a = users[0];
+        let b = users[1];
+        let c = users[2];
+        
+        //instead use destructuring...
+        let [a, b, c] = users;
+        console.log(a, b, c); // sam tyler brook
+
+        //values can be discarded...
+        let [a, ,b] = users;
+        console.log(a, b); //sam brook
+
+        //with rest parameters...
+        let [first, ...rest] = users;
+        console.log(first, rest); //sam["tyler", "brook"]
+        //the ... seems to take the rest
+
+        //for of loop on arrays...
+        for(let user of users){
+            console.log(user);
+        }
+
+        //array.find
+        let users = [
+            { login: "sam", admin: false},
+            { login: "brook", admin: true},
+            { login: "tyler", admin: true}
+        ];
+
+        //array.find(): returns the first index that meets the find criteria
+        //let admin = users.find(function(user){ //without arrow function
+        let admin = users.find((user) => {
+            return user.admin;
+        });
+        //or to make it shorter...
+        let notAdmin = users.find(user => !user.admin); //logs: { login: "sam", admin: false}
+
+    </script>
+
+    </body>
+</html>

@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <title>Javascript ES6: classes</title>
+    </head>
+    <body>
+
+    <script>
+
+    //consturctor function:
+    function SponsorWidget(name, description, url){
+        this.name = name;
+        this.description = description;
+        this.url = url;
+    }
+
+    //render function: too verbose...
+    SponsorWidget.prototype.render = function(){
+    };
+
+    //invocing the SponsorWidget function...
+    let sponsorWidget = new SponsorWidget(name, description, url);
+    sponsorWidget.render();
+
+
+    //neat! new way... constructor method: method for creating and initializing an object.
+    class SponsorWidget {
+
+        constructor(name, description, url){ //runs every time a new instance is created with the 'new' operator
+            this.name = name;
+            this.description = description;
+            this.url = url;
+        }
+
+        render(){
+            let link = this._buildLink(this.url);
+        }
+
+        //_buildLink is private. since it's being called inside SponsorWidget
+        _buildLink(url){ //prefixing with _ underscore is a convention that it should not be invoked from the public API
+
+        }
+
+    }
+
+    //to invoke it, just like before...
+    let sponsorWidget = new SponsorWidget(name, description, url);
+    sponsorWidget.render();
+
+
+
+    //subclasses: extending
+    //parent class...
+    class Widget {
+        constructor(){
+            this.baseCSS = "site-widget";
+        }
+        parse(value){
+            //
+        }
+    }
+
+    //child class...
+    class SponsorWidget extends Widget{
+        constructor(name, description, url){
+            super(); //causes the parents constructor class to be invoked
+        }
+        parse(){
+            let parsedName = super.parse(this.name); //calling the parent version of the parse method
+            return `Sponsor: ${parsedName}`;
+        }
+        render(){
+            let parsedName = this.parse(this.name);
+            let css = this._buildCSS(this.baseCSS);
+        }
+    }
+
+    </script>
+
+    </body>
+</html>
