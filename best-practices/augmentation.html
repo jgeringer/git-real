@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>Javascript Best Practices: Augmentation</title>
+    </head>
+    <body>
+
+        <script>
+            
+            //augmentation: modules often need to have additions to their existing properties.
+
+            var wartime = true;
+
+            var ARMORY = (function(war){ //global import (war): first step is to create a parameter. can create as many prams as there are globals that you will be importing.
+
+                //so essentially: war gets closed up inside the ARMORY namespace as a local variable.
+
+                return{
+                    makeWeapon: function(){
+                        //if(wartime){ //looks at a global variable. this is expesnive, since it looks all the way up the chain to the global namespace. not great.
+                        if(war){ //now replaced global 'wartime' with war.
+                            //let civilians have weapons...
+                        }
+                    }
+                }
+
+            })(wartime); //this is where the magic happens. you can pass all the globals into the IIFE using the calling parenthesis. imported!
+            
+
+            //warchest.js: augmentation...
+            ARMORY = (function(oldNS){ //since our namespace is global, we'll import it as a local, in order to make some modifications to a temp object.
+
+                //note! previous private data will not be accessible to the new properties created here
+
+                var oilBarrels = 1000;
+
+                oldNS.assignCatapult = function(regiment){
+                    //hooks up regiment and some oil barrels.
+                };
+
+                return oldNS; //we add all some new private values and public function that we desire, then return the modified module.
+
+            })(ARMORY); //pass in the old module
+
+        </script>
+
+    </body>
+</html>

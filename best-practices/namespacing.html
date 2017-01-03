@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <title>Javascript Best Practices: Module Design Pattern</title>
+    </head>
+    <body>
+
+        <script>
+            //external js file 1
+            var list = ["one", "two"];
+        </script>
+
+        <script>
+            //external js file 2
+            var list = ["a", "b"];
+        </script>
+
+        <!--problem, both lists are global-->
+
+        <script>
+            //simulated Javascript namespace...
+            var HOFMASTER = { //namespaces: commonly uppercased. it's the wrapper 
+                list: ["one", "two"],
+                displayHOF: function(){
+                    this.element = document.createElement("li"); //need to use this instead since it's now inside of an object.
+                       //element = document.createElement("li"); was this before
+                },
+
+                BIOGROPHIES: { //nested namespace example
+                    list: ["c", "d"]
+                }
+
+            };
+
+            //access it's function...
+            HOFMASTER.displayHOF();
+
+
+        </script>
+
+    </body>
+</html>

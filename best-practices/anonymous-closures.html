@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <title>Javascript Best Practices: Anonymous Closures</title>
+    </head>
+    <body>
+
+        <script>
+            //closures are used to cause some properties to be private, bound only to surrounding functions local scope, some public.
+            //wrap the whole thing inside an immediately invoked function expression (IIFE)
+            var ARMORY = (function(){ //was this before: var ARMORY = { 
+
+                var weaponList = ["one", "two"]; //private
+
+                //public stuff goes in here
+                return{                
+                    displayHOF: function(){      
+                        this.element = document.createElement("li");
+                    }
+                };
+
+            })(); //was this before: };
+
+            ARMORY.displayHOF(); //this can be accessed, but not ARMORY.weaponList
+
+
+        </script>
+
+    </body>
+</html>

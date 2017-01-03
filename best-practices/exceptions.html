@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <title>Javascript Best Practices: Exceptions</title>
+    </head>
+    <body>
+
+        <script>
+
+            alert(alarm); //runtime error...
+
+            //introducing try. a test area for code. to handle errors gracefully.
+            try{
+                alert(alarm);
+            } catch (error){
+                alert("uh oh...\n" + error); //uh oh... Reference Error: alarm is not defined.
+            }
+
+            //if list is a different type, like a number. 
+            try{
+                var newHallOfFame = ["Joe", "Theresa", "Hailey"];
+
+                if(list === undefined){
+                    throw new ReferenceError();
+                };
+
+                if((list instanceof Array) === false){
+                    throw new TypeError();
+                };
+
+                list.concat(newHallOfFame);
+            } catch (error){
+                if (error instanceof ReferenceError){
+                    alert(error + "\n" + "The HoF roster doesnt exist as list.");
+                }
+                if(error instanceof TypeError){
+                    alert(error + "\n" + "Alas, the Halls list is no longer an array. Check for disasterous override!");
+                }
+            }
+
+            
+            //able to make custom errors...
+            try{
+                if(i ===x){
+                    throw new Error("An existing element was not found.");
+                }
+            } catch(error2){ //error2: can be named anything
+
+            }
+            finally{
+                console.log('this happens no matter what');
+            }
+            
+
+        </script>
+
+    </body>
+</html>

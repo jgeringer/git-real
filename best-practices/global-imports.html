@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>Javascript Best Practices: Global Imports</title>
+    </head>
+    <body>
+
+        <script>
+            
+            //global Imports: for clearer, faster globals in modules, use imports.
+
+            var wartime = true;
+
+            var ARMORY = (function(war){ //global import (war): first step is to create a parameter. can create as many prams as there are globals that you will be importing.
+
+                //so essentially: war gets closed up inside the ARMORY namespace as a local variable.
+
+                return{
+                    makeWeapon: function(){
+                        //if(wartime){ //looks at a global variable. this is expesnive, since it looks all the way up the chain to the global namespace. not great.
+                        if(war){ //now replaced global 'wartime' with war.
+                            //let civilians have weapons...
+                        }
+                    }
+                }
+
+            })(wartime); //this is where the magic happens. you can pass all the globals into the IIFE using the calling parenthesis. imported!
+            
+        </script>
+
+    </body>
+</html>

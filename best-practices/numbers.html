@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title>Javascript Best Practices: Numbers</title>
+    </head>
+    <body>
+
+        <script>
+
+            var num = 0.1 + 0.2;
+            console.log(num); // 0.30000004 //makes binary floating point values to all decimal based operations
+
+            //toFixed(): also, it rounds up the last number
+            console.log(num.toFixed(1)); //"0.3"
+            console.log(num.toFixed(4)); //"0.3000"
+            //toFixed() returns a string
+
+            //parseFloat(): turns strings that have decimals in them into numbers
+            parseFloat((2.33 / 100).toFixed(2)); //0.23
+
+            //parseInt(): seeks first intenger in a string...
+            parseInt("88 keys on a piano"); //88
+            parseFloat("88 keys on a piano"); //88
+            parseInt("keys on a piano"); //NaN
+
+            //use a Radix value to ensure correct parsing...
+            parseInt("021", 10); //21
+
+            //NaN:
+            function isThisActuallyANumberDontLie(data){
+                return (typeof data === "number" && !NaN(data));
+            }
+
+            isThisActuallyANumberDontLie(640); //true
+            isThisActuallyANumberDontLie("640"); //false
+            isThisActuallyANumberDontLie(NaN); //false
+
+
+            //form data:
+            
+
+
+        </script>
+
+    </body>
+</html>

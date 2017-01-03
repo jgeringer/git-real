@@ -1,0 +1,82 @@
+<html>
+    <head>
+        <title>Javascript Best Practices: Careful Comparisons</title>
+    </head>
+    <body>
+
+        <script>
+
+            // '4' == 4;    //true
+            // '4' === 4;   //false
+
+            //instanceof: checks if something inherits from another
+
+            function LeatherArmor(bodyStyle, numBuckles, numSpaulders){
+                this.bodyStyle = bodyStyle;
+                this.numBuckles = numBuckles;
+                this.numSpaulders = numSpaulders;
+            };
+
+            function ChainMail(metal, linkDiameter, hasHood, skirtLength){
+                this.metal = metal;
+                this.linkDiameter = linkDiameter;
+                this.hasHood = hasHood;
+                this.skirtLength = skirtLength;
+            };
+
+            //Arrary's list of available armor objects
+            var armorList = [
+                { armor: "LeatherArmor" },
+                { armor: "ChainMail" }
+            ]; 
+
+            //List of Knight objects
+            var newbs = [
+                { knight: "Joe" },
+                { knight: "Larry" }
+            ];
+
+            //instanceof operator...
+            function assignKnightsArmor(knights, armorAvail){
+                var x = knights.length;
+                var y = armorAvail.length;
+                for(var i=0; i<x; i++){
+                    for(var j=0; j<y; j++){
+                        if(armorAvail[j] instanceof ChainMail){
+                            knights[i].armor = armorAvail.splice(j, 1)[0]; //as soon as we find a ChainMail, we splice it out of the armor array and give it to the Knight.
+                            y--;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            assignKnightsArmor(newbs, armorList);
+
+
+            //adding the Armor prototype to LeatherArmor and ChainMail constructor functions... so all knights can 'putOn'.
+            //this way, every ChainMail and LeatherArmor will have a parent of Armor.prototype
+            function Armor(location){
+                this.location = location;
+            };
+
+            Armor.prototype = {
+                putOn: function(){
+                    alert('your armor is on.');
+                }
+            }
+
+            LeatherArmor.prototype = Object.create(Armor.prototype);
+            ChainMail.prototype = Object.create(Armor.prototype);
+
+            var kingsMail = new ChainMail('gold', 2, true, 36);
+            console.log(kingsMail instanceof Armor); //logs: true
+
+
+
+
+
+        </script>
+
+    </body>
+</html>
